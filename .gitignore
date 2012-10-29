@@ -26,6 +26,10 @@
 *.mtc
 *.mtc0
 
+#VIM files
+*.swp
+
+
 # Compiled source #
 ###################
 *.com
