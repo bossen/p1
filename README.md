@@ -29,7 +29,16 @@ Push to github
 	git pull	
 
 
+Texmaker hints:
+==
+Dansk ordbog:
+--
 
+http://www.stavekontrolden.dk/main/sspinputfiles/da_DK.dic
+og
+http://www.stavekontrolden.dk/main/sspinputfiles/da_DK.aff
+
+Gemmes til samme mappe, og .dic filen vælges i "Options" > "Configure Texmaker" > "Editor", i feltet "Spelling dictionary"
 
 
 Will become a heading
