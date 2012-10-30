@@ -17,7 +17,7 @@ eller
 
 Commit (stadig på egen computer)
 
-	commit -m 'Kommentar her'
+	git commit -m 'Kommentar her'
 
 Push to github
 
@@ -55,3 +55,4 @@ Will become a sub heading
 - This will be a list item
 
 	Add a indent and this will end up as code
+
