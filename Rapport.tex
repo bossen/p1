@@ -7,6 +7,9 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{lingmacros}
 \usepackage{tree-dvips}
+\usepackage{url}
+\usepackage{graphicx}
+
 
 \begin{document}
 
@@ -23,11 +26,15 @@
 % TEKST SÆTTES UNDER HER
 \chapter{Indledning}
 
-\include{indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her.
+\include{Indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her.
 
 \chapter{Det Initierende Problem}
 
 Tekst...
+
+\chapter{Komprimeringsalgoritmer}
+
+\input{Indhold/Komprimeringsalgoritmer}
 
 \chapter{Begreber}
 
@@ -44,5 +51,9 @@ Tekst...
 \section{Afsnit}
 
 Tekst...
+
+\begin{thebibliography}{99} %Max 
+\input{Bibliography}
+\end{thebibliography}
 
 \end{document}

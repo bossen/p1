@@ -41,6 +41,15 @@ http://www.stavekontrolden.dk/main/sspinputfiles/da_DK.aff
 Gemmes til samme mappe, og .dic filen vælges i "Options" > "Configure Texmaker" > "Editor", i feltet "Spelling dictionary"
 
 
+Indsæt billede:
+--
+eg:
+	\includegraphics[scale=0.35]{Billeder/Huffman_tree_2.png}
+
+mere info:
+http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+
+
 Will become a heading
 ==============
 
