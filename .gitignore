@@ -29,6 +29,9 @@
 #VIM files
 *.swp
 
+#pdf
+.pdf
+.PDF
 
 # Compiled source #
 ###################
