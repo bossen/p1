@@ -9,7 +9,7 @@ Komprimering af en kort besked
 
 **To push:**
 
-	git add . 	(tilføjer alle nye dokumenter, men ikke dokumenter der er ændret i)
+	git add . 	(Tilføjer alle nye dokumenter, men ikke dokumenter der er ændret i)
 
 eller	
 
@@ -43,7 +43,8 @@ Gemmes til samme mappe, og .dic filen vælges i "Options" > "Configure Texmaker"
 
 Indsæt billede:
 --
-eg:
+Eksempel:
+
 	\includegraphics[scale=0.35]{Billeder/Huffman_tree_2.png}
 
 mere info:
