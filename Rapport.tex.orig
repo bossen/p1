@@ -19,21 +19,22 @@
 \pagebreak
 \maketitle
 
-\tableofcontents
+\tableofcontents %Indholdsfortegnelse
 
 \renewcommand{\chaptername}{Kapitel}
 
 % TEKST SÆTTES UNDER HER
 \chapter{Indledning}
 
+<<<<<<< HEAD
 \input{Indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her.
+=======
+\include{Indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her...
+>>>>>>> c26639e7b322d9ec510d04670fbfe4fa75c8a5c6
 
-\chapter{Problemdokumentation}
-\input{indhold/Problemdokumentation}
+\chapter{Det Initierende Problem}
 
-\chapter{Allerede eksisterende løsninger}
-
-\input{Indhold/Eksisterende_Loesninger}
+Tekst...
 
 \chapter{Komprimeringsalgoritmer}
 
