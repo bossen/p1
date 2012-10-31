@@ -30,8 +30,8 @@
 *.swp
 
 #pdf
-.pdf
-.PDF
+*.pdf
+*.PDF
 
 # Compiled source #
 ###################
