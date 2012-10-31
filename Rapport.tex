@@ -1,7 +1,7 @@
 \documentclass[12pt]{report}
 %\fontencoding{T1}
-%\usepackage[utf8]{inputenc}
 
+%\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[danish]{babel}
 \usepackage[hidelinks]{hyperref}
@@ -26,38 +26,50 @@
 
 % TEKST SÆTTES UNDER HER
 \chapter{Indledning}
+	\input{Indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her.
 
-\input{Indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her.
+\chapter{Analyse}
 
-\chapter{Problemdokumentation}
-\input{Indhold/Problemdokumentation}
+	\section{SMS Teknologi}
+	\input{Indhold/SMS_Teknologi}
+	\clearpage
+	
+	\section{Komprimeringsalgoritmer}
+	\input{Indhold/Komprimeringsalgoritmer}
+	\clearpage
+	
+	\section{Problemdokumentation}
+	\input{Indhold/Problemdokumentation}
+	\clearpage
 
-\chapter{Allerede eksisterende løsninger}
+	\section{Allerede eksisterende løsninger}
+	\input{Indhold/Eksisterende_Loesninger}
+	\clearpage
 
-\input{Indhold/Eksisterende_Loesninger}
+	\section{Afgrænsning}
+	
+	
+	\section{Problemformulering}
+	
+	
+	\section{Produktkrav}
+	
+	
+\chapter{Teori om komprimering?}
 
-\chapter{Komprimeringsalgoritmer}
 
-\input{Indhold/Komprimeringsalgoritmer}
 
-\chapter{Begreber}
+\chapter{Løsning}
 
-Tekst...
 
-\section{Afsnit}
 
-Tekst...
+\chapter{Konklusion}
 
-\section{Afsnit}
 
-Tekst...
 
-\section{Afsnit}
-
-Tekst...
-
-\begin{thebibliography}{99} %Max 
-\input{Bibliography}
+\begin{thebibliography}{99} %Max
+ \input{Bibliography}
 \end{thebibliography}
 
+\chapter*{Bilag}
 \end{document}

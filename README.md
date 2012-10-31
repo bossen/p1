@@ -9,7 +9,7 @@ Komprimering af en kort besked.
 
 **To push:**
 
-	git add . 	(Tilføjer alle nye dokumenter, men ikke dokumenter der er ændret i)
+	git add . 	(Tilføjer alle nye dokumenter, og dokumenter der er ændret i)
 
 eller	
 
