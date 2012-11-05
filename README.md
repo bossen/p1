@@ -11,7 +11,7 @@ Komprimering af en kort besked.
 
 	git add . 	(Tilføjer alle nye dokumenter, og dokumenter der er ændret i)
 
-eller	
+eller:	
 
 	git add file1.tex file2.tex
 
