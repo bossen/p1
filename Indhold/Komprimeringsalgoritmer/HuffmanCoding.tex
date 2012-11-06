@@ -4,10 +4,52 @@ For så at kunne få de orginale data tilbage fra den komprimerede form, kræver de
 
 For at Huffman coding effektivt kan fungere, skal algoritmen have adgang til hele datamængden, for at kunne analysere hyppigheden af forskellige tegn. Dette betyder at algoritmen skal løbe i gennem datamængden to gange. Første gang, for at indsamle statistik, og anden gang for så at foretage den reelle komprimering. En eksempel på en algoritme der ikke har den ulempe er komprimeringsmetoden "Lempel-Ziv-Welsh".
 
-
-\begin{figure}[H]
+Figur \ref{fig:huffmantree} viser et Huffman træ, genereret ud fra sætningen "this is an example of a huffman tree". Tabel \ref{tab:huffmantable} viser frekvensen, og en kort kode i bits for de forskellige tegn. Nu fylder sætningen kun 135 bits, mod de 288 bits sætningen originalt fyldte - en besparelse på ca 53%. 
+\begin{figure}[htb]
 \centering
 \includegraphics[width=\linewidth]{Billeder/Huffman_tree_2.png}
 \caption{Huffman træ}
-%\label{fig:awesome_image}
+\label{fig:huffmantree}
 \end{figure}
+
+\begin{table}
+\begin{tabular}{|c|c|c|}
+\hline
+Tegn & Hyppighed & Binær kode \\
+\hline \hline
+space & 7 & 111 \\ 
+\hline 
+a & 4 & 010 \\ 
+\hline 
+e & 4 & 000 \\ 
+\hline 
+f & 3 & 1101 \\ 
+\hline 
+h & 2 & 1010 \\ 
+\hline 
+i & 2 & 1000 \\ 
+\hline 
+m & 2 & 0111 \\ 
+\hline 
+n & 2 & 0010 \\ 
+\hline 
+s & 2 & 1011 \\ 
+\hline 
+t & 2 & 0110 \\ 
+\hline 
+l & 1 & 11001 \\ 
+\hline 
+o & 1 & 00110 \\ 
+\hline 
+p & 1 & 10011 \\ 
+\hline 
+r & 1 & 11000 \\ 
+\hline 
+u & 1 & 00111 \\ 
+\hline 
+x & 1 & 10010 \\ 
+\hline 
+\end{tabular}
+\caption{This table shows some data}
+\label{tab:huffmantable}
+\end{table}
