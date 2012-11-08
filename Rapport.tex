@@ -26,13 +26,19 @@
 \date{\today}
 \pagebreak
 \maketitle
+% Fjerner sidetal på forsiden
+\thispagestyle{empty}
+\end{titlepage}
 
 \tableofcontents
+% Fjerner sidetal på indholdsfortegnelse
+\thispagestyle{empty}
 
 \renewcommand{\chaptername}{Kapitel}
 
 % TEKST SÆTTES UNDER HER
 \chapter{Indledning}
+\setcounter{page}{3}
 	\input{Indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her.
 	
 	\section{Initierende problem}
