@@ -21,18 +21,25 @@
 %Hent titelblad (Som henter synopsis fra Indhold/Synopsis.tex):
 \input{Indhold/Titelblad}
 
+\begin{titlepage}
 \title{P1-Rapport}
 \author{B228}
 \date{\today}
 \pagebreak
 \maketitle
+% Fjerner sidetal på forsiden
+\thispagestyle{empty}
+\end{titlepage}
 
 \tableofcontents
+% Fjerner sidetal på indholdsfortegnelse
+\thispagestyle{empty}
 
 \renewcommand{\chaptername}{Kapitel}
 
 % TEKST SÆTTES UNDER HER
 \chapter{Indledning}
+\setcounter{page}{3}
 	\input{Indhold/Indledning} %Indhold af Indledning.tex bliver sat ind her.
 	
 	\section{Initierende problem}
@@ -42,39 +49,39 @@
 
 	\section{SMS Teknologi}
 	\input{Indhold/SMS_Teknologi}
-	\clearpage
+	%\clearpage
 	
 	\section{Tegnsæt}
 	\input{Indhold/Tegnsaet}
-	\clearpage
+	%\clearpage
 	
 	\section{Komprimeringsalgoritmer}
 	\input{Indhold/Komprimeringsalgoritmer}
-	\clearpage
+	%\clearpage
 	
 	\section{Problemdokumentation}
 	\input{Indhold/Problemdokumentation}
-	\clearpage
+	%\clearpage
 	
 	\section{Metodevalg}
 	\input{Indhold/Metodevalg}
-	\clearpage
+	%\clearpage
 
 	\section{Allerede eksisterende løsninger}
 	\input{Indhold/Eksisterende_Loesninger}
-	\clearpage
+	%\clearpage
 
 	\section{Afgrænsning}
 	\input{Indhold/Problemafgraensning}
-	\clearpage
+	%\clearpage
 
 	\section{Problemformulering}
 	\input{Indhold/Problemformulering}	
-	\clearpage
+	%\clearpage
 	
 	\section{Produktkrav}
 	\input{Indhold/Produktkrav.tex}
-	\clearpage
+	%\clearpage
 	
 %\chapter{Teori om komprimering?}
 
