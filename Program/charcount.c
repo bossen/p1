@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #define PRINTBOUNDARY 0
 #define MAXCHARS 256
 
@@ -31,10 +32,12 @@ int main(void)
     FILE *result = fopen("occurrences.txt", "w");
     for(i = 0; i < charcount; i++)
         if(array[i].amount > 0)
-            if(array[i].symbol == '\n')
-                fprintf(result, "NL:%25d\n", array[i].amount);
+            if (!isprint(array[i].symbol) && array[i].symbol != '\n' && array[i].symbol != ' ')
+                fprintf(result, "Dec(%2d):%25d\n", array[i].symbol, array[i].amount);
+            else if(array[i].symbol == '\n')
+                fprintf(result, "%-7s:%25d\n", "Newline", array[i].amount);
             else if(array[i].symbol == ' ')
-                fprintf(result, "SP:%25d\n", array[i].amount);
+                fprintf(result, "%-7s:%25d\n", "Space", array[i].amount);
             else
-                fprintf(result, "%-2c:%25d\n", array[i].symbol, array[i].amount);
+                fprintf(result, "%-7c:%25d\n", array[i].symbol, array[i].amount);
 }
