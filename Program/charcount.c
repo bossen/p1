@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define PRINTBOUNDARY 32
+#define PRINTBOUNDARY 0
 #define MAXCHARS 256
 
 typedef struct {
@@ -30,5 +30,11 @@ int main(void)
     qsort(array, charcount, sizeof(entry), entryCompare);
     FILE *result = fopen("occurrences.txt", "w");
     for(i = 0; i < charcount; i++)
-        fprintf(result, "%c : %d\n", array[i].symbol, array[i].amount);
+        if(array[i].amount > 0)
+            if(array[i].symbol == '\n')
+                fprintf(result, "NL:%25d\n", array[i].amount);
+            else if(array[i].symbol == ' ')
+                fprintf(result, "SP:%25d\n", array[i].amount);
+            else
+                fprintf(result, "%-2c:%25d\n", array[i].symbol, array[i].amount);
 }
