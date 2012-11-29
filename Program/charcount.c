@@ -4,7 +4,7 @@
 #define MAXCHARS 256
 
 typedef struct {
-    char symbol;
+    unsigned char symbol;
     unsigned long int amount;
 } entry;
 
