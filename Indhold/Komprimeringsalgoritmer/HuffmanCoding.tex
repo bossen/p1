@@ -1,22 +1,22 @@
-Komprimeringsalgoritmen "Huffman coding", er udviklet af David A. Huffman. Huffman udviklede algoritmen mens han var Ph.D studerende på MIT. I 1952 udgav han dokumentet"A Method for the Construction of Minimum-Redundancy Codes"\cite{A_Method_for}. Her beskrev Huffman hvordan hans komprimerings algoritme fungerede. Hvad han havde udviklet, var en 'lossless' (tabsfri) komprimerings metode, hvilket betyder, at der ikke vil være noget tab af information ved at komprimere. Komprimeringsmetoden er beregnet til binære systemer, og formålet med algoritmen er at få en given datamænde til at benytte et minimalt antal bit. 
+Komprimeringsalgoritmen "Huffman coding", er udviklet af David A. Huffman. Huffman udviklede algoritmen mens han var Ph.D studerende pÃ¥ MIT. I 1952 udgav han dokumentet"A Method for the Construction of Minimum-Redundancy Codes"\cite{A_Method_for}. Her beskrev Huffman hvordan hans komprimerings algoritme fungerede. Hvad han havde udviklet, var en 'lossless' (tabsfri) komprimerings metode, hvilket betyder, at der ikke vil vÃ¦re noget tab af information ved at komprimere. Komprimeringsmetoden er beregnet til binÃ¦re systemer, og formÃ¥let med algoritmen er at fÃ¥ en given datamÃ¦nde til at benytte et minimalt antal bit. 
 
-For så at kunne få de orginale data tilbage fra den komprimerede form, kræver det selvfølgelig, at man har en form for ordbog, der beskriver hvilke tegn, der hører sammen med hvilke bits.
+For sÃ¥ at kunne fÃ¥ de orginale data tilbage fra den komprimerede form, krÃ¦ver det selvfÃ¸lgelig, at man har en form for ordbog, der beskriver hvilke tegn, der hÃ¸rer sammen med hvilke bits.
 
-For at Huffman coding effektivt kan fungere, skal algoritmen have adgang til hele datamængden, for at kunne analysere hyppigheden af forskellige tegn. Dette betyder at algoritmen skal løbe i gennem datamængden to gange. Første gang, for at indsamle statistik, og anden gang for så at foretage den reelle komprimering. En eksempel på en algoritme der ikke har den ulempe er komprimeringsmetoden "Lempel-Ziv-Welch".
+For at Huffman coding effektivt kan fungere, skal algoritmen have adgang til hele datamÃ¦ngden, for at kunne analysere hyppigheden af forskellige tegn. Dette betyder at algoritmen skal lÃ¸be i gennem datamÃ¦ngden to gange. FÃ¸rste gang, for at indsamle statistik, og anden gang for sÃ¥ at foretage den reelle komprimering. En eksempel pÃ¥ en algoritme der ikke har den ulempe er komprimeringsmetoden "Lempel-Ziv-Welch".
 
-Figur \ref{fig:huffmantree} viser et Huffman træ, genereret ud fra sætningen "this is an example of a huffman tree" \cite{huff_wiki}. Tabel \ref{tab:huffmantable} viser frekvensen, og en kort kode i bits for de forskellige tegn. Nu fylder sætningen kun 135 bits, mod de 288 bits sætningen originalt fyldte - en besparelse på ca 53\%. Denne kræver selvfølgelig, at de binære koder allerede er kendes af algoritmen der skal dekomprimere datamængden.
+Figur \ref{fig:huffmantree} viser et Huffman trÃ¦, genereret ud fra sÃ¦tningen "this is an example of a huffman tree" \cite{huff_wiki}. Tabel \ref{tab:huffmantable} viser frekvensen, og en kort kode i bits for de forskellige tegn. Nu fylder sÃ¦tningen kun 135 bits, mod de 288 bits sÃ¦tningen originalt fyldte - en besparelse pÃ¥ ca 53\%. Denne krÃ¦ver selvfÃ¸lgelig, at de binÃ¦re koder allerede er kendes af algoritmen der skal dekomprimere datamÃ¦ngden.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{Billeder/Huffman_tree_2.png}
-\caption{Huffman træ}
+\caption{Huffman trÃ¦}
 \label{fig:huffmantree}
 \end{figure}
 
 \begin{table}
 \begin{tabular}{|c|c|c|}
 \hline
-Tegn & Hyppighed & Binær kode \\
+Tegn & Hyppighed & BinÃ¦r kode \\
 \hline \hline
 space & 7 & 111 \\ 
 \hline 
