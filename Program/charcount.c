@@ -33,11 +33,13 @@ int main(void)
     for(i = 0; i < charcount; i++)
         if(array[i].amount > 0)
             if (!isprint(array[i].symbol) && array[i].symbol != '\n' && array[i].symbol != ' ')
-                fprintf(result, "Dec(%5d):%25d\n", array[i].symbol, array[i].amount);
+                fprintf(result, "Dec(%5d):%25lu\n", array[i].symbol, array[i].amount);
             else if(array[i].symbol == '\n')
-                fprintf(result, "%-10s:%25d\n", "Newline", array[i].amount);
+                fprintf(result, "%-10s:%25lu\n", "Newline", array[i].amount);
             else if(array[i].symbol == ' ')
-                fprintf(result, "%-10s:%25d\n", "Space", array[i].amount);
+                fprintf(result, "%-10s:%25lu\n", "Space", array[i].amount);
             else
-                fprintf(result, "%-10c:%25d\n", array[i].symbol, array[i].amount);
+                fprintf(result, "%-10c:%25lu\n", array[i].symbol, array[i].amount);
+            
+    fclose(result);
 }
