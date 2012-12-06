@@ -6,7 +6,7 @@ int main (void){
    printf("Enter message to be compressed\n");
    scanf(" [^\n]", string);
 
-
+   // Awesome Code Here
 
 return 0;
 }
