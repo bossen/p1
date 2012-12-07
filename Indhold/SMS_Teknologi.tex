@@ -1,10 +1,12 @@
 Langt de fleste mennesker beskæftiger sig dagligt med SMS'er - dog uden at vide hvad der i virkeligheden sker når der sendes en SMS. Selv når en mobiltelefon ikke er i brug, sender og modtager den små datapakker til/fra mobilcentralen. Disse data hjælper blandt andet med at lokalisere de signaltårne mobilen er tilkoblet til. Dette kan især blive nyttigt, idet at mobilcentralen ved hvilke tårne der skal benyttes da telefonen skal modtage opkald eller data, som f.eks. SMS'er.
 
 Når en SMS besked bliver sendt fra en mobil bliver den i første omgang sendt til mobilcentralen via signaltårne. Når mobilcentralen modtager beskeden bliver den overført til et SMS-center (SMSC). SMS-centeret tager sig af at sende beskeden til den rette modtager, ved at overføre den til den ønskede modtagers SMS-center. Når beskeden når frem til den pågældendes center, bliver den, hvis det er muligt, overført til mobilcentralen der sender beskeden til modtageren. Hvis modtageren af en eller anden årsag ikke er at finde på et mobilt netværk bliver beskeden opbevaret på SMS-centeret i op til flere dage, og vil først blive afsendt når der er mulighed for det. SMS-centeret kan endvidere sende en bekræftelse til afsenderen, når beskeden bliver leveret til modtageren. Alt dette er muligt via Signaling System no. 7 - som er en protokol suite, der indeholder forskellige protokoller. Protokollerne benyttet af SMS systemer befinder sig i mere specifikt i SS7 suitens Mobile Application Part (MAP). \cite{Pro_1} \cite{sms_max1}
-
+\\
+\\
 \noindent
 \includegraphics[width=\linewidth]{Billeder/Mobil.png}
-
+\\
+\\
 Signalerings systemerne i MAP er efter design begrænset til visse størrelser af data. Opfinderne af SMS systemet prøvede med forskellige beskeder, hvorefter man fandt ud af at langt de fleste var under 160 tegn. Man mente derfor at 160 tegn var rigeligt til at rumme de fleste beskeder, og en SMS beskeds maksimale størrelse blev derfor defineret til 160 tegn. Efter introduktion af udvidede tegnsæt er definitionen præciseret til 140 bytes, eller 1120 bits. \cite{sms_max1} \cite{sms_max2}
 
 
