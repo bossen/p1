@@ -9,7 +9,7 @@ GSM netværket består af forskellige celler, som hver har en basestation, der k
 \label {celler}
 \end{figure} 
 
-Når man bruger sin mobiltelefon vil den, gennem luften, skabe kontakt til den nærmeste basestation, se figur \ref{GSM}. Hvis man har sendt en SMS-besked, vil denne modtages af basestationen, som sender den videre til SMS-centeret. SMS-centeret er herefter ansvarlig for at viderebringe SMS’en til modtageren. Hvis SMS-centeret ikke kan få forbindelse til modtagertelefonen (hvis denne er slukket eller udenfor signal), gemmes beskeden i centeret og sendes når der er oprettet forbindelse til modtageren. På figuren er der indtegnet et link mellem mobiltelefon og SMS-center, disse kaldes ”Mobile switching centre” og er netværksenheder, som tager sig af den trådløse kommunikation. \cite{info}
+Når man bruger sin mobiltelefon vil den, gennem luften, skabe kontakt til den nærmeste basestation, se figur \ref{GSM}. Hvis man har sendt en SMS-besked, vil denne modtages af basestationen, som sender den videre til SMS-centeret. SMS-centeret er herefter ansvarlig for at viderebringe SMS’en til modtageren. Hvis SMS-centeret ikke kan få forbindelse til modtagertelefonen (hvis denne er slukket eller udenfor signal), gemmes beskeden i centeret og sendes når der er oprettet forbindelse til modtageren. \cite{info}
 
 \begin{figure}[H]
 \centering
@@ -18,4 +18,4 @@ Når man bruger sin mobiltelefon vil den, gennem luften, skabe kontakt til den n
 \label {GSM}
 \end{figure} 
 
-I GSM er der indbygget to muligheder for at sende en flere af SMS-beskeder sammen. Den ene mulighed er SMS-sammenkædning, hvilket vil sige at en række SMS-beskeder bliver kædet sammen og sendes hver for sig, men hos modtageren bliver de sat sammen i samme rækkefølge og læses igen som én besked. Den anden mulighed er komprimering af tekst med Huffman coding \cite{UNI}. Hvis denne mulighed udnyttes kan man sende optil 80 tegn mere pr. SMS-besked. Dette kræver dog at telefonen fra fabrikkens side har sprogspecifike kompressionsparametre. Det har ikke været muligt at finde ud af om man idag reelt gør brug af denne mulighed for at komprimere tekstbeskeder. 
+I GSM er der indbygget to muligheder for at sende en flere af SMS-beskeder sammen. Den ene mulighed er SMS-sammenkædning, hvilket vil sige at en række SMS-beskeder bliver kædet sammen og sendes hver for sig, men hos modtageren bliver de sat sammen i korrekt rækkefølge og læses igen som én besked. Den anden mulighed er komprimering af tekst med Huffman coding \cite{UNI}. Hvis denne mulighed udnyttes kan man sende optil 80 tegn mere pr. SMS-besked. Dette kræver dog at telefonen fra fabrikkens side har sprogspecifike kompressionsparametre. Det har ikke været muligt at finde ud af om man idag reelt gør brug af denne mulighed for at komprimere tekstbeskeder. 
