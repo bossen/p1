@@ -24,37 +24,114 @@ int toggleBit(char *byte, int position);
 // Booleans
 int bitIsSet(char *byte, int position);
 
-// Unicode og GSM streng konverterings funktioner
+// Unicode og GSM streng funktioner
 int ustrlen(uchar *string);
+int gsmstrlen(char *string);
 void printuchar(uchar ch);
 char ucharToGSM(uchar ch);
+uchar gsmToUchar(char ch);
 uchar *fReadUnicode(char *filename);
+void fWriteUnicode(uchar *string, char *filename);
+uchar unicodeNullTerm();
 
 int main(void)
 {
     int i;
-    //  Læser input fra en unicode fil
+    
+    //  Læser input fra en unicode fil ind i en unicode streng
     uchar *string = fReadUnicode("test.txt");
-    // Skal få lavet en printfunktion til dette
-    for(i = 0; i < ustrlen(string) ;i++)
+
+    // Variable til konvertering til GSM-7bit
+    char *result = (char *)malloc(sizeof(char)*(ustrlen(string) + 1));
+    result[(ustrlen(string))] = '\0';
+    
+    // Konverter streng fra Unicode til GSM-7bit
+    for(i = 0; i < ustrlen(string); i++)
     {
-        // Konverterer og printer unicode tegn som GSM-7bit tegn
-        // !!! Udskriver den decimale værdi, og ikke tegnets symbol.
-        printf("%d\n", ucharToGSM(string[i]));
+        result[i] = ucharToGSM(string[i]);
     }
     
-    /* Test af inflate og deflate
-    char *test = "abcdefgabcdehfg";
-    printStringBinary(test);
-    printf("\n\n");
-    char *random = gsmDeflate(test);  
-    printStringBinary(random);
-    printf("\nInflated:\n");    
-    char *inflated = gsmInflate(random); 
-    printStringBinary(inflated);
-    */
+    result = gsmDeflate(result);
+
+/* 
+På dette tidspunkt er 'result' lig med den data 
+mobiltelefonen ville skrive sms'en som. 
+*/
+    
+// Nu har vi format som computeren forstår
+result = gsmInflate(result); 
+    
+/*
+Huffman Komprimering og dekomprimering ville sidenhen foregå her
+Al kode ovenover her, vil blive kørt FØR komprimering, mens al
+kode nedenunder her vil blive kørt EFTER dekomprimering.
+*/
+    
+// Tilbage på format som mobilen forstår
+result = gsmDeflate(result); 
+    
+    
+    // Genskab unicode sekvens ud fra GSM-7bit
+    result = gsmInflate(result);
+    
+    int length = strlen(result);
+    uchar original[(length + 1)];
+    for(i = 0; i < length; i++)
+    {
+        original[i] = gsmToUchar(result[i]);
+    }
+    // Terminer unicode streng
+    original[length] = unicodeNullTerm();
+   
+    // Skriv den genskabte streng ind i out.txt
+    fWriteUnicode(original, "out.txt");
+       
+/* Test af inflate og deflate << KUN TIL DEBUG
+char *test = "abcdefgabcdehfg";
+printStringBinary(test);
+printf("\n\n");
+char *random = gsmDeflate(test);  
+printStringBinary(random);
+printf("\nInflated:\n");    
+char *inflated = gsmInflate(random); 
+printStringBinary(inflated);
+*/
 }
 
+uchar unicodeNullTerm()
+{
+    uchar term;
+    term.value = -66;
+    term.extension = -28;
+    return term;
+}
+
+void fWriteUnicode(uchar *string, char *filename)
+{
+    FILE *file = fopen(filename, "w");
+    // UTF8 Byte Order Mark
+    unsigned char bom[3] = {239, 187 ,191};
+    fwrite(bom, sizeof(char), 3, file);
+    
+    // Skriv strengen i unicode format
+    int i, size;
+    char values[2];
+    for(i = 0; i < ustrlen(string);i++)
+    {
+        if (string[i].value >= 0)
+        {
+            values[0] = string[i].value;
+            fwrite(values, sizeof(char), 1, file);
+        }
+        else
+        {
+            values[0] = string[i].value;
+            values[1] = string[i].extension;
+            fwrite(values, sizeof(char), 2, file);
+        }
+    }
+    fclose(file);
+}
 uchar *fReadUnicode(char *filename)
 {
     FILE *file = fopen(filename, "r");
@@ -93,7 +170,184 @@ uchar *fReadUnicode(char *filename)
             string[i].value = ch;
         }
     }
+    fclose(file);
     return string;
+}
+
+uchar gsmToUchar(char ch)
+{
+    uchar result;
+        switch (ch)
+        {
+            case 0:
+                result.value = 64;
+                break;
+            case 2:
+                result.value = 36;
+                break;
+            case 17:
+                result.value = 95;
+                break;
+            case 16:
+                result.value = -50;
+                result.extension = -108;
+                break;
+            case 18:
+                result.value = -50;
+                result.extension = -90;
+                break;
+            case 19:
+                result.value = -50;
+                result.extension = -109;
+                break;
+            case 20:
+                result.value = -50;
+                result.extension = -101;
+                break;
+            case 21:
+                result.value = -50;
+                result.extension = -87;
+                break;
+            case 22:
+                result.value = -50;
+                result.extension = -96;
+                break;
+            case 23:
+                result.value = -50;
+                result.extension = -88;
+                break;
+            case 24:
+                result.value = -50;
+                result.extension = -93;
+                break;
+            case 25:
+                result.value = -50;
+                result.extension = -104;
+            case 26:
+                result.value = -50;
+                result.extension = -98;
+                break;
+            case 1:
+                result.value = -62;
+                result.extension = -93;
+                break;
+            case 3:
+                result.value = -62;
+                result.extension = -91;
+                break;
+            case 36:
+                result.value = -62;
+                result.extension = -92;
+                break;
+            case 64:
+                result.value = -62;
+                result.extension = -95;
+                break;
+            case 95:
+                result.value = -62;
+                result.extension = -89;
+                break;
+            case 96:
+                result.value = -62;
+                result.extension = -65;
+                break;
+            case 4:
+                result.value = -61;
+                result.extension = -88;
+                break;
+            case 5:
+                result.value = -61;
+                result.extension = -87;
+                break;
+            case 6:
+                result.value = -61;
+                result.extension = -71;
+                break;
+            case 7:
+                result.value = -61;
+                result.extension = -84;
+                break;
+            case 8:
+                result.value = -61;
+                result.extension = -78;
+                break;
+            case 9:
+                result.value = -61;
+                result.extension = -121;
+                break;
+            case 11:
+                result.value = -61;
+                result.extension = -104;
+                break;
+            case 12:
+                result.value = -61;
+                result.extension = -72;
+                break;
+            case 14:
+                result.value = -61;
+                result.extension = -123;
+                break;
+            case 15:
+                result.value = -61;
+                result.extension = -91;
+                break;
+            case 28:
+                result.value = -61;
+                result.extension = -122;
+                break;
+            case 29:
+                result.value = -61;
+                result.extension = -90;
+                break;
+            case 30:
+                result.value = -61;
+                result.extension = -97;
+                break;
+            case 31:
+                result.value = -61;
+                result.extension = -119;
+                break;
+            case 91:
+                result.value = -61;
+                result.extension = -124;
+                break;
+            case 92:
+                result.value = -61;
+                result.extension = -106;
+                break;
+            case 93:
+                result.value = -61;
+                result.extension = -111;
+                break;
+            case 94:
+                result.value = -61;
+                result.extension = -100;
+                break;
+            case 123:
+                result.value = -61;
+                result.extension = -92;
+                break;
+            case 124:
+                result.value = -61;
+                result.extension = -74;
+                break;
+            case 125:
+                result.value = -61;
+                result.extension = -79;
+                break;
+            case 126:
+                result.value = -61;
+                result.extension = -68;
+                break;
+            case 127:
+                result.value = -61;
+                result.extension = -96;
+                break;
+            default:
+                result.value = ch;
+                break;
+        }
+        return result;
 }
 
 char ucharToGSM(uchar ch)
@@ -220,7 +474,13 @@ void printuchar(uchar ch)
         printf("%d ", ch.value);
     }
 }
-
+int gsmstrlen(char *string)
+{
+    int i = 0;
+    while (string[i] != 13) 
+        i++;
+    return i;
+}
 int ustrlen(uchar *string)
 {
     int i = 0;
@@ -272,7 +532,7 @@ char *gsmDeflate(char *bytes)
             tempBytes[i] = tempBytes[i] << 1;
         }
     }
-    tempBytes[endLength] = '\0';
+    tempBytes[endLength] = 13;
     
     // Escape med CR
     if(!((length % 7) - (length / 8)))
@@ -287,7 +547,7 @@ char *gsmDeflate(char *bytes)
 char *gsmInflate(char *bytes)
 {
     int i, temp, j;
-    int length = strlen(bytes), endLength = length + (length / 7);
+    int length = gsmstrlen(bytes), endLength = length + (length / 7);
     char *tempBytes = (char *)malloc(sizeof(char)*endLength + 1);
     for(i = 0; i < length; i++)
     {
