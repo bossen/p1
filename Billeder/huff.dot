@@ -1,0 +1,24 @@
+/* 
+  Huffman Tree DOT graph.
+
+  DOT Reference :  http://www.graphviz.org/doc/info/lang.html
+                   http://en.wikipedia.org/wiki/DOT_language
+  Timestamp     :  1355122906 
+  Phrase        :  'AAAAAAAAAAKKKKKKKKSSSSSLLLLLMM'
+
+  Generated on http://huffman.ooz.ie/
+*/
+
+digraph G {
+    edge [label=0];
+    graph [ranksep=0];
+    L [shape=record, label="{{L|5}|00}"];
+    M [shape=record, label="{{M|2}|010}"];
+    S [shape=record, label="{{S|5}|011}"];
+    K [shape=record, label="{{K|8}|10}"];
+    A [shape=record, label="{{A|10}|11}"];
+    30 -> 12 -> L;
+    7 -> M;
+    18 -> K;12 -> 7 -> S [label=1];
+    30 -> 18 -> A [label=1];
+}

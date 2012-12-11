@@ -1,0 +1,36 @@
+/* 
+  Huffman Tree DOT graph.
+
+  DOT Reference :  http://www.graphviz.org/doc/info/lang.html
+                   http://en.wikipedia.org/wiki/DOT_language
+  Timestamp     :  1355208666 
+  Phrase        :  'DETTE ER ET EKSEMPEL'
+
+  Generated on http://huffman.ooz.ie/
+*/
+
+digraph G {
+    edge [label=0];
+    graph [ranksep=0];
+    E [shape=record, label="{{E|7}|0}"];
+    R [shape=record, label="{{R|1}|1000}"];
+    P [shape=record, label="{{P|1}|10010}"];
+    S [shape=record, label="{{S|1}|10011}"];
+    SPACE [shape=record, label="{{SPACE|3}|101}"];
+    T [shape=record, label="{{T|3}|110}"];
+    M [shape=record, label="{{M|1}|11100}"];
+    L [shape=record, label="{{L|1}|11101}"];
+    ML [label=2];
+    D [shape=record, label="{{D|1}|11110}"];
+    K [shape=record, label="{{K|1}|11111}"];
+    DK [label=2];
+    20 -> E;
+    13 -> 6 -> 3 -> R;
+    2 -> P;
+    7 -> T;
+    4 -> ML -> M;
+    DK -> D;3 -> 2 -> S [label=1];
+    6 -> SPACE [label=1];
+    ML -> L [label=1];
+    20 -> 13 -> 7 -> 4 -> DK -> K [label=1];
+}

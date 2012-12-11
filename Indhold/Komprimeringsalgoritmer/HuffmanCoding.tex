@@ -4,55 +4,51 @@ For så at kunne få de orginale data tilbage fra den komprimerede form, kræver
 
 For at Huffman coding effektivt kan fungere, skal algoritmen have adgang til hele datamængden, for at kunne analysere hyppigheden af forskellige tegn. Dette betyder at algoritmen skal løbe i gennem datamængden to gange. Første gang, for at indsamle statistik, og anden gang for så at foretage den reelle komprimering. En eksempel på en algoritme der ikke har den ulempe er komprimeringsmetoden "Lempel-Ziv-Welch".
 
-Figur \ref{fig:huffmantree} viser et Huffman træ, genereret ud fra sætningen "this is an example of a huffman tree" \cite{huff_wiki}. Tabel \ref{tab:huffmantable} viser frekvensen, og en kort kode i bits for de forskellige tegn. Nu fylder sætningen kun 135 bits, mod de 288 bits sætningen originalt fyldte - en besparelse på ca 53\%. Denne kræver selvfølgelig, at de binære koder allerede er kendes af algoritmen der skal dekomprimere datamængden.
+
+\subsubsection{Generation af Huffman træ}
+Huffman algoritmen kigger på frekvensen af tegn, og giver så de hyppigste tegn, den korteste binære kode. For at finde frem til de binære koder til hver tegn, laver man et huffman træ. Træet gør, at den binære kode til et tegn, aldrig vil være starten på koden til et andet tegn. Træet laves ved først at tælle hyppigheden af de forskellige tegn brugt i datamængden der skal komprimeres, og derefter tage de to tegn med lavest frekvens, og lave et nyt punkt, med frekvensen af det første og andet tegn lagt sammen. Dette gøres så indtil der kun er et punkt tilbage. Dette punkt er så toppen af træet. For så at finde frem til den binære kode for hvert tegn, starter man i toppen af træet, og tilføjer 0 eller 1, hvis man gå til henholdsvis venstre eller højre.
+\\
+\\
+Hvis vi kigger på sætningen "dette er et eksempel", viser tabel \ref{tab:huffmantable_new} de forskellige tegn brugt i sætningen, sorteret efter hyppighed. Her tager vi så de to tegn med lavest frekvens (fx D og K), og laver et nyt punkt, med frekvensen af det første og andet tegn lagt sammen. Dette nye punkt, sættes så ind i listen, i stedet for de to tegn. Herefter laves der igen et punkt, med de to tegn/punkter med lavest frekvens, og dette gøres til der kun er et punkt tilbage. Det endelige resultat, bliver så Huffman træet, figur \ref{fig:huffmantree}. 
+
+
+
+\begin{figure}[hba]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\cellcolor{ForestGreen}\color{white}{\textbf{Tegn}} &
+\cellcolor{ForestGreen}\color{white}{\textbf{Frekvens}} \\ 
+\hline 
+E & 7 \\ 
+\hline 
+SPACE & 3 \\ 
+\hline 
+T & 3 \\ 
+\hline 
+R & 1 \\ 
+\hline 
+P & 1 \\ 
+\hline 
+S & 1 \\ 
+\hline 
+M & 1 \\ 
+\hline 
+L & 1 \\ 
+\hline 
+D & 1 \\ 
+\hline 
+K & 1 \\ 
+\hline 
+\end{tabular} 
+\caption{Frekvens for tegn i sætningen ''dette er et eksempel''}
+\label{tab:huffmantable_new}
+\end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{Billeder/Huffman_tree_2.png}
-\caption{Huffman træ}
+%\includegraphics[width=\linewidth]{Billeder/Huffman_tree_2.png}
+\input{Billeder/huffexample.tex}
+\caption{Huffman træ for sætningen ''dette er et eksempel''}
 \label{fig:huffmantree}
 \end{figure}
-
-\begin{table}
-\begin{center}
-\begin{tabular}{|c|c|c|}
-\hline
- \cellcolor{ForestGreen}\color{white}{\textbf{Tegn}} &  \cellcolor{ForestGreen}\color{white}{\textbf{Hyppighed}} & \cellcolor{ForestGreen}\color{white}{\textbf{Binær kode}} \\
-\hline
-space & 7 & 111 \\ 
-\hline 
-a & 4 & 010 \\ 
-\hline 
-e & 4 & 000 \\ 
-\hline 
-f & 3 & 1101 \\ 
-\hline 
-h & 2 & 1010 \\ 
-\hline 
-i & 2 & 1000 \\ 
-\hline 
-m & 2 & 0111 \\ 
-\hline 
-n & 2 & 0010 \\ 
-\hline 
-s & 2 & 1011 \\ 
-\hline 
-t & 2 & 0110 \\ 
-\hline 
-l & 1 & 11001 \\ 
-\hline 
-o & 1 & 00110 \\ 
-\hline 
-p & 1 & 10011 \\ 
-\hline 
-r & 1 & 11000 \\ 
-\hline 
-u & 1 & 00111 \\ 
-\hline 
-x & 1 & 10010 \\ 
-\hline 
-\end{tabular}
-\caption{Hyppighed og kode af forskellige tegn}
-\label{tab:huffmantable}
- \end{center}
-\end{table}
