@@ -16,10 +16,13 @@
 \usepackage{colortbl}
 \usepackage{algorithm2e}
 \usepackage{geometry}
+
 \usepackage{tikz}
 \usetikzlibrary{snakes,arrows,shapes}
 \usepackage{amsmath}
 
+\usepackage{xcolor} 
+\usepackage{fix-cm} 
 
 %Titelblad fix
 %\usepackage[ansinew]{inputenc}
@@ -28,18 +31,20 @@
 
 \begin{document}
 \setcounter{page}{2}
-%Hent titelblad (Som henter synopsis fra Indhold/Synopsis.tex):
-\input{Indhold/Titelblad}
 
 \begin{titlepage}
-\title{P1-Rapport}
-\author{B228}
-\date{\today}
-\pagebreak
-\maketitle
-% Fjerner sidetal på forsiden
+\input{Indhold/forside}
+%\title{P1-Rapport}
+%\author{B228}
+%\date{\today}
+%\pagebreak
+%\maketitle
+%% Fjerner sidetal på forsiden
 \thispagestyle{empty}
 \end{titlepage}
+
+%Hent titelblad (Som henter synopsis fra Indhold/Synopsis.tex):
+\input{Indhold/Titelblad}
 
 \tableofcontents
 % Fjerner sidetal på indholdsfortegnelse
@@ -104,6 +109,9 @@
    
 	\subsection{Tabsfri kontra ikke tabsfri}
 	\input{Indhold/Tabsfri.tex}
+
+	\subsection{Forekomst af tegn}
+	\input{Indhold/TegnForekomst.tex}
 
 \chapter{Konklusion}
 
