@@ -5,13 +5,13 @@ Før den mest optimerede Huffman algoritme kan laves, er man nødt til at vide h
 Som udgangspunkt vi at kigge på hele den danske Wikipedias indhold, da det som udgangspunkt var den største offentligt tilgængelige database for dansksprogede artikler vi kunne finde. Dette resulterede i at vi fik hentet over 340.000 danske artikler fra den frie encyklopædi. Hele denne mængde tekst blev kørt igennem et dertil indrettet program[INDSÆT EVT REFERENCE HER!!], som kunne læse samtlige tegn, tælle dem sammen og sortere efter hyppighed. Programmet er nærmere beskrevet i afsnittet ”[INDSÆT AFSNITSNAVN HER!!]”.  Med resultatet af optællingen i hånden, går det imidlertid op for os at der er en del tegn der er enten urealistisk højt eller lavt på listen. Det er fx tegn som ”=” og ”0” der ligger højt på listen, og tegn som ”:” og ”)” der ligger meget lavt på listen. Dette skyldes at der, naturligvis, ikke bliver brugt ret mange humørikoner i artiklerne. Se figur \ref{wikiSMS2}.
 
 \begin{figure}[hba]
-\label{wikiSMS2}
 \includegraphics{Billeder/wikiVsSms.png}
 \caption {Oversigt over de øverste 32 tegn.}
+\label{wikiSMS2}
 \end{figure}
 
 
-Det gik op for os at vi måtte analysere rigtige SMS beskeder. Snart var 13.000 SMS beskeder indsamlet og klar til analysering. Som forventet rykker tegn der indgår i humørikoner højere op på listen. Det største spring ser vi ved kolon, som rykker fra plads 53 på wikipedia-listen til plads 19 på SMS-listen. Ydermere ser vi at ”H” går fra plads 56 på wikipedia-listen til plads 26 på SMS-listen. Det kan forklares med at mange beskeder starter med ordet ”Hej”. Se eventuelt bilag [INDSÆT BILAGSNUMMER HER!!]. Alt dette er vi nødt til at tage hensyn til i vores implementering af Huffman algoritmen.
+Det gik op for os at vi måtte analysere rigtige SMS beskeder. Snart var 13.000 SMS beskeder indsamlet og klar til analysering. Som forventet rykker tegn der indgår i humørikoner højere op på listen. Det største spring ser vi ved kolon, som rykker fra plads 53 på wikipedia-listen til plads 19 på SMS-listen. Ydermere ser vi at ”H” går fra plads 56 på wikipedia-listen til plads 26 på SMS-listen. Det kan forklares med at mange beskeder starter med ordet ”Hej”. Se eventuelt bilag \ref{wikiAnalyse} og \ref{SMSanalyse}. Alt dette er vi nødt til at tage hensyn til i vores implementering af Huffman algoritmen.
 
 [SAMMENLIGNING AF ANTAL TEGN I ALT]
 
