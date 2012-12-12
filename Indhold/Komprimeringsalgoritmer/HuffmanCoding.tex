@@ -5,7 +5,7 @@ For så at kunne få de orginale data tilbage fra den komprimerede form, kræver
 For at Huffman coding effektivt kan fungere, skal algoritmen have adgang til hele datamængden, for at kunne analysere hyppigheden af forskellige tegn. Dette betyder at algoritmen skal løbe i gennem datamængden to gange. Første gang, for at indsamle statistik, og anden gang for så at foretage den reelle komprimering. En eksempel på en algoritme der ikke har den ulempe er komprimeringsmetoden "Lempel-Ziv-Welch".
 
 
-\subsubsection{Generation af Huffman træ}
+\subsubsection{Generering af Huffman træ}
 Huffman algoritmen kigger på frekvensen af tegn, og giver så de hyppigste tegn, den korteste binære kode. For at finde frem til de binære koder til hver tegn, laver man et huffman træ. Træet gør, at den binære kode til et tegn, aldrig vil være starten på koden til et andet tegn. Træet laves ved først at tælle hyppigheden af de forskellige tegn brugt i datamængden der skal komprimeres, og derefter tage de to tegn med lavest frekvens, og lave et nyt punkt, med frekvensen af det første og andet tegn lagt sammen. Dette gøres så indtil der kun er et punkt tilbage. Dette punkt er så toppen af træet. For så at finde frem til den binære kode for hvert tegn, starter man i toppen af træet, og tilføjer 0 eller 1, hvis man gå til henholdsvis venstre eller højre.
 \\
 \\
