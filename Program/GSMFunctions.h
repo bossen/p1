@@ -29,20 +29,7 @@ uchar gsmToUchar(char ch);
 uchar *fReadUnicode(char *filename);
 void fWriteUnicode(uchar *string, char *filename);
 uchar unicodeNullTerm();
- /*
-int main(void)
-{
-    int i;
-    uchar *string;
-    string = fReadUnicode("KJAA.13000.txt");
-    for(i = 0; i < ustrlen(string); i++) {
-        if(string[i].value != 0) {
-            printuchar(string[i]);
-            printf("\n");
-        }
-        }
-}
-*/
+ 
 uchar unicodeNullTerm()
 {
     uchar term;

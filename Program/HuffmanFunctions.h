@@ -18,64 +18,79 @@ int nodeCompare(const void *n1, const void *n2);
 int isLeaf(HuffNode *node);
 void outputTree(HuffNode *rootNode, char *bitstring);
 HuffNode *generateTree(int count, char *letters, int *frequencies);
-void huffmanDecode(HuffNode *tree, BitStream *stream);
-BitStream *establishBitStream(char *filename);
+char *huffmanDecode(HuffNode *tree, BitStream *stream);
+BitStream *establishBitStream(char *filename, char *mode);
+void closeBitStream(BitStream *stream);
 int readBit(BitStream *stream);
-
-/*
-int main(void)
-{
-    char letters[200];
-    int frequencies[200];
-    int count = 0;
-    int ch;
-    int freq;
-    FILE *freqfile = fopen("gsmfreq.txt", "r");
-    while(!feof(freqfile)) {
-        fscanf(freqfile, " %d:%d", &ch, &freq);
-        letters[count] = ch;
-        frequencies[count] = freq;
-        count++;
-    }    
-	//char letters[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v'};
-	//int frequencies[] = {5,7,10,15,20,45,55,24,15,1,44,55,12,13,4,2,15,66,25,1,4,5};	
-    char bitstring[20] = {'\0'};
-    
-    //int i;
-    //BitStream *stream = establishBitStream("test.txt");
-    
-	HuffNode *tree = generateTree(count, letters, frequencies);
-	outputTree(tree, bitstring);
-    
-    //printf("\nDecoding:");
-    //huffmanDecode(tree, stream);
-}
-*/
+int writeBit(BitStream *stream, int bit);
 
 int readBit(BitStream *stream) {
-    
-    if(stream->position == -1)
-        return -1;
+    int read = 0;
     if(stream->position == 8)
     {
-        stream->buffer = fgetc(stream->file);
+        read = fgetc(stream->file);
+        stream->buffer = read;
         stream->position = 0;
     }
-    int res;
+    if(read == EOF)
+        stream->position = -1;
+    if(stream->position == -1)
+        return -1;
     
+    int res;
     res = ((stream->buffer) >> (7 - (stream->position))) & 1;
     stream->position++;
-    if(feof(stream->file))
-        stream->position = -1;
-    
+
     return res;
 }
 
-BitStream *establishBitStream(char *filename) 
+int writeBit(BitStream *stream, int bit) 
+{
+    // Flush buffer into stream
+    if(bit == 2) {
+        int i = 0;
+        while(stream->position <= 7)
+        {
+            stream->buffer = (stream->buffer << 1);
+            if(i < 1 || i > 2)
+                setBit(&(stream->buffer), 0);
+            else
+                clearBit(&(stream->buffer), 0);
+            
+            stream->position++;
+            i++;
+        }
+        fwrite(&(stream->buffer), sizeof(char), 1, stream->file);
+        return 0;
+    }
+    
+
+    stream->buffer = (stream-> buffer << 1);
+    bit == 0 ? clearBit(&(stream->buffer), 0) : setBit(&(stream->buffer), 0);
+    stream->position++;
+    if(stream->position == 8)
+    {
+        fwrite(&(stream->buffer), sizeof(char), 1, stream->file);
+        stream->position = 0;
+    }
+    return 1;
+}
+
+
+void closeBitStream(BitStream *stream)
+{
+    fclose(stream->file);
+    free(stream);
+}
+
+BitStream *establishBitStream(char *filename, char *mode)
 {
     BitStream *stream = (BitStream *)malloc(sizeof(BitStream));
-    stream->file = fopen(filename, "r");
-    stream->position = 8;
+    stream->file = fopen(filename, mode);
+    if(mode[0] == 'r')
+        stream->position = 8;
+    else if(mode[0] == 'w')
+        stream->position = 0;
     return stream;
 }
 
@@ -123,12 +138,17 @@ int isLeaf(HuffNode *node)
 		return 0;
 }
 
-void huffmanDecode(HuffNode *tree, BitStream *stream)
+char *huffmanDecode(HuffNode *tree, BitStream *stream)
 {
-    int i, res;
+    int res, size = 1, ch;
+    while((ch = fgetc(stream->file)) != EOF)
+        size++;
+    rewind(stream->file);
+    char *result = malloc(sizeof(char)*size + 1);
+    
     HuffNode *conveyor = tree;
-
-    for(i = 0; (res = readBit(stream)) != -1 ;i++)
+    size = 0;
+    while((res = readBit(stream)) != -1)
     {
         if(res == 1) {
             conveyor = conveyor->left;
@@ -137,10 +157,13 @@ void huffmanDecode(HuffNode *tree, BitStream *stream)
             conveyor = conveyor->right;      
         }
         if(isLeaf(conveyor)) {
-            printf("%c", conveyor->symbol);
+            result[size] = conveyor->symbol;
+            size++;
             conveyor = tree;
         }
     }
+    result[size] = 13;
+    return result;
 }
 
 void outputTree(HuffNode *rootNode, char *bitstring)
@@ -224,7 +247,11 @@ void huffEncode (unsigned char *inputst){
   int i, j;
   //Open file for read
   FILE *fp_tree = fopen("GSM7b.tree", "r");
-
+  // Establish bitstream
+  BitStream *testout = establishBitStream("Testbinary.bin", "w");
+        
+        
+  
   //Create struct array
   chHuff *huffCharacters;
   huffCharacters = (chHuff *)malloc(sizeof(chHuff)*LINES-1);
@@ -248,10 +275,12 @@ void huffEncode (unsigned char *inputst){
     //Send all bits, to buffer
     for (j = 0 ; j < strlen(huffBits); j++){
       //printf("%d", dataout[j] == 49 ? 1 : 0);
-      bitBuffer(huffBits[j] == 49 ? 1 : 0);
+      writeBit(testout, huffBits[j] == 49 ? 1 : 0);
     }
   }
   
-  //Force bitBuffer to write halffull buffer
-  bitBuffer(2);
+  //Flush buffer to to file
+  writeBit(testout, 2);
+  // Close bitstream
+  closeBitStream(testout);
 }
