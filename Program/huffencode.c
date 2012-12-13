@@ -21,7 +21,7 @@ int main (void){
     char bitstring[20] = {'\0'};
    
     //int i;
-    BitStream *stream = establishBitStream("Testbinary.bin", "r");
+    
     
 	HuffNode *tree = generateTree(count, letters, frequencies);
 	
@@ -46,6 +46,7 @@ int main (void){
         }
         result[(ustrlen(string))] = 13;
         result = gsmDeflate(result);
+        printf("Original message is %d bytes long\n", gsmstrlen(result));
     /* 
     På dette tidspunkt er 'result' lig med den data 
     mobiltelefonen ville skrive sms'en som. 
@@ -59,7 +60,9 @@ int main (void){
     Al kode ovenover her, vil blive kørt FØR komprimering, mens al
     kode nedenunder her vil blive kørt EFTER dekomprimering.
     */
+    BitStream *stream = establishBitStream("Testbinary.bin", "r");
     result = huffmanDecode(tree, stream);
+    closeBitStream(stream);
     printf("Decompressed testbinary.bin\n");
     // Tilbage på format som mobilen forstår
     //result = gsmDeflate(result); 
