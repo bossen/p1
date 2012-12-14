@@ -1,1 +1,1 @@
-﻿Hvornår var det det var?
+﻿Til at besvarer dette spørgsmål, hvar vi udviklet et program, som kan komprimere en tekstbesked ved brug af Huffman-algoritmen. Som det ses
