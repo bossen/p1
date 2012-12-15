@@ -58,11 +58,12 @@ int isRoot(HuffNode *node);
 HuffNode **calculateEntryPoints(HuffNode *tree);
 char *getEntryString(HuffNode **points, int point);
 HuffNode *treeFromFile(const char *filename);
-void huffmanCompress(char *filename, char *message, HuffNode **codepoints);
+void huffmanCompress(char *filename, char *message, HuffNode **codepoints, char *padvalue);
 char *huffmanDecompress(HuffNode *tree, char *inputfile);
 BitStream *establishBitStream(char *filename, char *mode);
 void closeBitStream(BitStream *stream);
 int readBit(BitStream *stream);
+char *getPaddingValue(HuffNode *tree, int minLength);
 
 /*
     UNICODE FUNCTIONS SECTION
@@ -657,8 +658,32 @@ char *getEntryString(HuffNode **points, int point)
     return entry;
 }
 
+char *getPaddingValue(HuffNode *tree, int minLength)
+{
+    outputTree(tree, "temp.hufftree");
+    
+    FILE *treefile = fopen("temp.hufftree", "r");
+    char currbin[100] = {'\0'};
+    int node;
+   
+    while(!feof(treefile)) {
+        fscanf(treefile, " %d:%s", &node, currbin);
+        if(strlen(currbin) >= minLength)
+            break;
+    }
+    fclose(treefile);
+    if(currbin[0] == '\0') {
+        printf("ERROR! Could not find a branch value for padding");
+        return NULL;
+    }
+    // Trim and malloc value to return
+    char *result = (char *)malloc(sizeof(char) * strlen(currbin) + 1);
+    strcpy(result, currbin);
+    return result;
+}
+
 // Function that compresses a GSM 7-bit string using indexed Huffman tree
-void huffmanCompress(char *filename, char *message, HuffNode **codepoints)
+void huffmanCompress(char *filename, char *message, HuffNode **codepoints, char *padvalue)
 {
     int length = gsmstrlen(message), i, j, position = 0, byteIndex = 0,
         estSize = length * 1.5; // Estimates the maximum final message size
@@ -680,14 +705,13 @@ void huffmanCompress(char *filename, char *message, HuffNode **codepoints)
             }
         }
     }
-    // Pad buffer until full
+    // Pad buffer towards branch until full
     i = 0;
     while(byteIndex > 0) {
-        i++;
         buffer = buffer << 1;
-        if(i <= 5)
-            buffer++;
+        buffer += (padvalue[i] == 48 ? 0 : 1);
         byteIndex++;
+        i++;
         if(byteIndex == 8)
             break;
     }
@@ -726,7 +750,6 @@ char *huffmanDecompress(HuffNode *tree, char *inputfile)
             conveyor = tree;
         }
     }
-    printf("%d", size);
     // Close bitstream
     closeBitStream(stream);
     // Trim memory to exact size

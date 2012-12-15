@@ -40,8 +40,11 @@ int main(void)
             char *message = fReadUnicodeAsGSM(messagefile);
             printf(" ... [ DONE ]\n\n");
             
+            // Gets a codevalue which is atleast 8 bits long for padding
+            char *padvalue = getPaddingValue(tree, 8);
+            
             printf("Compressing message into file: %s", compressionfile);
-            huffmanCompress(compressionfile, message, entries);
+            huffmanCompress(compressionfile, message, entries, padvalue);
             printf(" ... [ DONE ]\n");
             break;
         
