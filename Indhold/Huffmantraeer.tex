@@ -1,4 +1,4 @@
-Hvis man vil komprimere en datamængde ved brug af Huffman coding, kræver det, at der bliver lavet et huffman træ. Dette træ kan genereres på tre forskellige måder: Statisk, dynamisk eller adaptivt. Principielt ser det resulterende bit-træ ens ud for hver af metoderne. Det handler mere om hvordan træerne bliver generet. I dette afsnit vil der være en gennemgang af hvordan disse metoder virker, samt deres fordele og ulemper i forhold til SMS beskeder. Den følgende tabel samt den følgende figur viser hvordan et potentielt Huffman bit-træ kunne se ud.
+Hvis man vil komprimere en datamængde ved brug af Huffman coding, kræver det, at der bliver lavet et huffman træ. Dette træ kan genereres på tre forskellige måder: Statisk, dynamisk eller adaptivt. Principielt ser det resulterende bit-træ ens ud for hver af metoderne. Det handler mere om hvordan træerne bliver genereret. I dette afsnit vil der være en gennemgang, af hvordan disse metoder virker, samt deres fordele og ulemper i forhold til SMS beskeder. Den følgende tabel samt den følgende figur viser, hvordan et potentielt Huffman bit-træ kunne se ud.
 
 \begin{table}[H]
 \begin{center}
@@ -22,7 +22,7 @@ E & 8 \\ \hline
 \label{fig:huffmantree_fred}
 \end{figure}
 
-Ud fra billedet kan man se at de tegn som forekommer mindst er placeret nederst i træet, D og E, mens det tegn som forekommer mest er placeret øverst, A. Hver gang man går et niveau ned så går længden på et tegn op. A har en længde på 1 bit mens B, C, D og E har en længde på 3 bit. Tegnet som forekommer mest får altså den mindste længde. Derudover kan man også ud fra figur \ref{fig:huffmantree_fred} se det følgende binære talsystem:
+Ud fra billedet kan man se, at de tegn som forekommer færrest gange, er placeret nederst i træet, D og E, mens det tegn som forekommer mest er placeret øverst, A. Hver gang man går et niveau ned så går længden på et tegn op. A har en længde på 1 bit mens B, C, D og E har en længde på 3 bit. Tegnet som forekommer mest, får altså den mindste længde. Derudover kan man også ud fra figur \ref{fig:huffmantree_fred} se det følgende binære talsystem:
 
 \begin{table}[H]
 \begin{center}
@@ -39,7 +39,7 @@ E & 111 & 3 \\ \hline
 \end{center}
 \end{table}
 
-Dette sæt af tegn og forekomster fylder i alt 496 bit for sig selv før det er blevet komprimeret hvis man går ud fra hvert tegn fylder 1 byte, altså 8 bit. I et Huffman træ som dette billedet viser, fylder de samme tegn 138 bit som kan findes ved at lægge tegnene sammen i forhold til deres forekomster og længder plus selve træet hvis det er et dynamiske træ. På figur \ref{fig:huffmantree_fred} kan man også se punkter som ikke indeholder nogen tegn. Disse punkter kaldes for knuder og har en størrelse magen til summen af punkterne nedenunder den. Den øverste knude hvor træet altid starter kaldes for roden. Enderne på træet som indeholder de egentlige tegn kaldes for blade.
+Dette sæt af tegn og forekomster fylder i alt 496 bit for sig selv, før det er blevet komprimeret, hvis man går ud fra hvert tegn fylder 1 byte, altså 8 bit. I et Huffman træ som dette billede viser, fylder de samme tegn 138 bit, som kan findes ved at lægge tegnene sammen i forhold til deres forekomster og længder plus selve træet hvis det er et dynamiske træ. På figur \ref{fig:huffmantree_fred} kan man også se punkter, som ikke indeholder nogen tegn. Disse punkter kaldes for knuder, og har en størrelse magen til summen af punkterne nedenunder den. Den øverste knude hvor træet altid starter kaldes for roden. Enderne på træet som indeholder de egentlige tegn kaldes for blade.
 
 \subsection{Statisk}
 \input{Indhold/Huffmantraeer/Statisk}
