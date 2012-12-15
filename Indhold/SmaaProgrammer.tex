@@ -1,0 +1,8 @@
+Før vi kunne analysere SMS beskeder, Wikipedia artikler eller andet materiale, var vi nødt til at lave to mindre programmer.
+
+Det ene program skulle sørge for at tekststykket der skulle analyseres, ikke indeholdte andet end den rå tekst. Samtlige SMS beskeder var fyldt med mange andre informationer end selve SMS beskeden. Informationer som afsenderens telefonnummer, afsendelses tidspunkt og hvad afsenderens navn i telefonbogen. Al denne information måtte sorteres fra, da den ville have indflydelse på resultatet. Vi fik lavet et program der kunne læse XML filerne, den filtype som SMS’erne var gemt som, der kunne vælge kun at læse bestemte tags eller attributes. I dette tilfælde var det som sagt kun body tagget vi var interesserede i, altså selve SMS beskeden. Programmet læser alt der står mellem tagget body=”.....” . Vi havde her taget højde for, at der kunne befinde gåseøjne inde midt i beskederne, disse var på forhånd escapet. Efter den reelle beskeder var indlæst, erstatter programmet de XML escapes det måtte være med ASCII escape sekvenser. Herefter kører den de resterende SMS beskeder igennem på samme vis.
+
+Det andet program var noget mere simpelt. Det læste beskederne igennem fra ende til anden, og talte hvert tegn det stødte på op. Til sidst blev tegnene sorteret efter hyppighed, dvs. de tegn der optrådte flest gange i teksten kom øverst.
+
+[LÆG KILDEKODEN VED SOM APPENDIX]
+ 
