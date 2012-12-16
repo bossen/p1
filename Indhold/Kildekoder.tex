@@ -1,0 +1,20 @@
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\lstset{
+  language=C,
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape,
+  keywordstyle=\color{Blue},
+  morestring=[b]",
+  stringstyle=\color{gray}
+}
+\lstdefinelanguage{C}
+{keywords={HuffNode}%
+}
+
+\section*{Programmet}
+\lstinputlisting[language=C, morekeywords={HuffNode, uchar, BitStream}]{Program/new/huffman.c}
+\clearpage
+\section*{Header}
+\lstinputlisting[language=C, morekeywords={HuffNode, uchar, BitStream}]{Program/new/HuffmanLibrary.h}
