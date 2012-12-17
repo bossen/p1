@@ -253,7 +253,6 @@ int fWriteUnicode(char *filename, uchar *string, int bom)
     return 1;
 }
 
-
 /*
     CONVERTION FUNCTIONS SECTION
 */
@@ -265,6 +264,9 @@ uchar gsmToUchar(char ch)
         // Remapping
         switch (ch)
         {
+            case -64:
+                result.value = 124;
+                break;
             case -101:
                 result.value = -30;
                 result.extension = -126;
