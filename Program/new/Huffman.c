@@ -15,9 +15,8 @@ int main(void)
     char *outputfile = "output.txt";
     
     // Read tree
-    printf("Importing tree from frequency index: %s", treefile);
+    printf("Importing tree from frequency index: %s\n", treefile);
     HuffNode *tree = treeFromFile(treefile);
-    printf(" ... [ DONE ]\n");
     
     // User input
     printf("Select mode: 1 for compression, 2 for decompression (0 terminates): ");
@@ -32,23 +31,19 @@ int main(void)
             break;
         case '1':
             // Compression mode
-            printf("Reading message from: %s", messagefile);
+            printf("Reading message from: %s\n", messagefile);
             char *message = fReadUnicodeAsGSM(messagefile);
-            printf(" ... [ DONE ]\n\n");
             
-            printf("Compressing message into file: %s", compressionfile);
+            printf("Compressing message into file: %s\n", compressionfile);
             huffmanCompress(compressionfile, message, tree);
-            printf(" ... [ DONE ]\n");
             break;
         case '2':
             // Decompression mode
-            printf("Decompressing data from %s", compressionfile);
+            printf("Decompressing data from %s\n", compressionfile);
             char *result = huffmanDecompress(tree, compressionfile);
-            printf(" ... [ DONE ]\n\n");
             
-            printf("Writing original message to file: %s", outputfile);
+            printf("Writing original message to file: %s\n", outputfile);
             fWriteGSMAsUnicode(outputfile, result);
-            printf(" ... [ DONE ]\n");
             break;
     }
 }

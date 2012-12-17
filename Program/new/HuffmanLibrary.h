@@ -522,7 +522,6 @@ char ucharToGSM(uchar ch)
                             return 93;
                     case -100:
                             return 94;
-                    
                     case -92:
                             return 123;
                     case -74:
@@ -534,6 +533,9 @@ char ucharToGSM(uchar ch)
                     case -96:
                             return 127;
                 }
+                default:
+                    printf("Read non GSM symbol, skipping\n");
+                    return 32;
         }
     }
 }
