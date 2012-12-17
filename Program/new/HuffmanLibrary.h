@@ -58,7 +58,7 @@ int isRoot(HuffNode *node);
 HuffNode **calculateEntryPoints(HuffNode *tree);
 char *getEntryString(HuffNode **points, int point);
 HuffNode *treeFromFile(const char *filename);
-void huffmanCompress(char *filename, char *message, HuffNode **codepoints, char *padvalue);
+void huffmanCompress(char *filename, char *message, HuffNode *tree);
 char *huffmanDecompress(HuffNode *tree, char *inputfile);
 BitStream *establishBitStream(char *filename, char *mode);
 void closeBitStream(BitStream *stream);
@@ -537,7 +537,7 @@ char ucharToGSM(uchar ch)
 char *fReadUnicodeAsGSM(char *filename)
 {
     // Read file in unicode
-    uchar *string = fReadUnicode(filename);
+    uchar *string = fReadUnicode(filename); 
     int length = ustrlen(string), i;
     char *gsmstring = (char *)malloc(sizeof(char) * length + 1);
     
@@ -545,7 +545,7 @@ char *fReadUnicodeAsGSM(char *filename)
     for(i = 0; i < length; i++)
         gsmstring[i] = ucharToGSM(string[i]);
     // Terminate string with GSM 7-bit Carriage return
-    gsmstring[length] = 13;
+    gsmstring[length] = -127;
     return gsmstring;
 }
 
@@ -572,7 +572,7 @@ int gsmstrlen(char *string)
 {
     int i = 0;
     // Seek for terminator
-    while(string[i] != 13)
+    while(string[i] != -127)
         i++;
     return i;
 }
@@ -683,15 +683,19 @@ char *getPaddingValue(HuffNode *tree, int minLength)
 }
 
 // Function that compresses a GSM 7-bit string using indexed Huffman tree
-void huffmanCompress(char *filename, char *message, HuffNode **codepoints, char *padvalue)
+void huffmanCompress(char *filename, char *message, HuffNode *tree)
 {
     int length = gsmstrlen(message), i, j, position = 0, byteIndex = 0,
         estSize = length * 1.5; // Estimates the maximum final message size
     char buffer, result[estSize];
+    // Index tree
+    HuffNode **entries = calculateEntryPoints(tree);
+    // Fetch a valid padding value from tree
+    char *padvalue = getPaddingValue(tree, 8);
     // Iterate through message
     for(i = 0; i < length; i++) {
         // Fetch current symbols codevalue
-        char *binval = getEntryString(codepoints, message[i]);
+        char *binval = getEntryString(entries, message[i]);
         for(j = 0; j < strlen(binval); j++) {
             // Write codevalue to buffer
             byteIndex++;
@@ -736,9 +740,9 @@ char *huffmanDecompress(HuffNode *tree, char *inputfile)
     char result[estSize];
     
     // Establish a bitstream to file
-    BitStream *stream = establishBitStream(inputfile, "r");
+    BitStream *stream = establishBitStream(inputfile, "rb");
     // Read file bitwise and iterate through tree
-    while((read = readBit(stream)) != -1){
+    while((read = readBit(stream)) != EOF){
         if(read == 0)
             conveyor = conveyor->right;
         else
@@ -756,7 +760,7 @@ char *huffmanDecompress(HuffNode *tree, char *inputfile)
     char *final = (char *)malloc(sizeof(char) * size + 1);
     for(position = 0; position < size; position++)
         final[position] = result[position];
-    final[position] = 13;
+    final[position] = -127;
     
     return final;
 }
@@ -926,10 +930,10 @@ int readBit(BitStream *stream)
         stream->position = 0;
     }
     // If file is at end
-    if(read == EOF)
+    if(read == EOF) {
         stream->position = -1;
-    if(stream->position == -1)
         return -1;
+    }   
     
     // Return current binary value
     int res;

@@ -9,7 +9,7 @@ int main(void)
     char selection;
     
     // File paths
-    char *treefile = "gsmfreq.txt";
+    char *treefile = "wikifreq.txt";
     char *messagefile = "test.txt";
     char *compressionfile = "result.bin";
     char *outputfile = "output.txt";
@@ -32,22 +32,14 @@ int main(void)
             break;
         case '1':
             // Compression mode
-            printf("Indexing tree for faster compression");
-            HuffNode **entries = calculateEntryPoints(tree);
-            printf(" ... [ DONE ]\n\n");
-            
             printf("Reading message from: %s", messagefile);
             char *message = fReadUnicodeAsGSM(messagefile);
             printf(" ... [ DONE ]\n\n");
             
-            // Gets a codevalue which is atleast 8 bits long for padding
-            char *padvalue = getPaddingValue(tree, 8);
-            
             printf("Compressing message into file: %s", compressionfile);
-            huffmanCompress(compressionfile, message, entries, padvalue);
+            huffmanCompress(compressionfile, message, tree);
             printf(" ... [ DONE ]\n");
             break;
-        
         case '2':
             // Decompression mode
             printf("Decompressing data from %s", compressionfile);
