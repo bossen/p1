@@ -249,6 +249,27 @@ uchar gsmToUchar(char ch)
         // Remapping
         switch (ch)
         {
+            case -60:
+                result.value = 91;
+                break;
+            case -61:
+                result.value = 126;
+                break;
+            case -62:
+                result.value = 93;
+                break;
+            case -47:
+                result.value = 92;
+                break;
+            case -40:
+                result.value = 123;
+                break;
+            case -41:
+                result.value = 125;
+                break;
+            case -20:
+                result.value = 94;
+                break;
             case 0:
                 result.value = 64;
                 break;
@@ -428,6 +449,22 @@ char ucharToGSM(uchar ch)
     {
         switch (ch.value)
         {
+            case 91:
+                return -60;
+            case 126:
+                return -61;
+            case 93:
+                return -62;
+            case 92:
+                return -47;
+            case 94:
+                return -20;
+            case 124:
+                return -64;
+            case 123:
+                return -40;
+            case 125:
+                return -41;
             case 64:
                 return 0;
             case 36:
@@ -626,7 +663,7 @@ HuffNode **calculateEntryPoints(HuffNode *tree)
     }
     
     // Dynamic memory allocation for reverse lookup table
-    HuffNode **entryPoints = (HuffNode **)malloc(sizeof(HuffNode *) * 127 + 1);
+    HuffNode **entryPoints = (HuffNode **)malloc(sizeof(HuffNode *) * 255 + 1);
     // Exception handling
     if(entryPoints == NULL) {
         printf("Out of Memory! - Quitting");
@@ -661,7 +698,7 @@ HuffNode **calculateEntryPoints(HuffNode *tree)
             j++;
         }
         // Add index to codepoint
-        entryPoints[node] = conveyor;
+        entryPoints[((unsigned char)node)] = conveyor;
     }
     // Close file handle
     fclose(treedata);
@@ -735,7 +772,7 @@ void huffmanCompress(char *filename, char *message, HuffNode *tree)
     // Iterate through message
     for(i = 0; i < length; i++) {
         // Fetch current symbols codevalue
-        char *binval = getEntryString(entries, message[i]);
+        char *binval = getEntryString(entries, (unsigned char)message[i]);
         for(j = 0; j < strlen(binval); j++) {
             // Write codevalue to buffer
             byteIndex++;
