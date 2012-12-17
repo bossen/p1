@@ -1,4 +1,4 @@
-abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ
-123456789	tab space
+﻿abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ
+0123456789 space
 
-½§!"@#£¤$%¡&¥/{([)]=}?±+`´|¨^~'*-_.:,;<>\€µ
+½§!"@#£¤$%¡&¥/{([)]=}?±+`´|¨^~'*-_.:,;<>\€
