@@ -1,0 +1,98 @@
+\documentclass[12pt,a4paper]{report}
+%\fontencoding{T1}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[danish]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{url}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{lastpage}
+\usepackage{color}
+\usepackage[x11names,rgb,usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{colortbl}
+\usepackage{algorithm2e}
+\usepackage{geometry}
+\usepackage{titlesec, blindtext, color}
+\definecolor{gray75}{gray}{0.75}
+\definecolor{gray90}{gray}{0.90}
+\definecolor{ForestGreen}{RGB}{15,116,61}
+\definecolor{gray25}{gray}{0.25}
+\newcommand{\hsp}{\hspace{20pt}}
+
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+\usepackage{amsmath}
+
+\usepackage{xcolor} 
+\usepackage{fix-cm} 
+\usepackage{pgfplots}
+
+%Titelblad fix
+%\usepackage[ansinew]{inputenc}
+\usepackage{a4}
+
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+
+\begin{document}
+\setcounter{page}{2}
+
+\begin{titlepage}
+\input{Indhold/forside}
+%\title{P1-Rapport}
+%\author{B228}
+%\date{\today}
+%\pagebreak
+%\maketitle
+%% Fjerner sidetal på forsiden
+\thispagestyle{empty}
+\end{titlepage}
+
+
+\tableofcontents
+% Fjerner sidetal på indholdsfortegnelse
+\thispagestyle{empty}
+
+\renewcommand{\chaptername}{Kapitel}
+
+% TEKST SÆTTES UNDER HER
+\chapter{Indledning}
+\setcounter{page}{3}
+	\input{Indhold/Indledning_og_forventning} %Indhold af Indledning.tex bliver sat ind her.
+	
+
+\chapter{Projektplanlægning og projektstyring}
+ 
+    \input{Indhold/Projektplanlaegning}
+
+
+\chapter{Samarbejde i gruppen}
+ 
+    \input{Indhold/Samarbejde_i_gruppen}
+
+
+\chapter{Samarbejde med vejledere}
+ 
+    \input{Indhold/Samarbejde_med_vejledere}
+
+
+\chapter{Læreprocessen}
+ 
+    \input{Indhold/laeerprocessen}
+
+
+\chapter{Konklussion}
+ 
+    \input{Indhold/Konklussion}
+
+\chapter*{Bilag}
+\input {Bilag}
+
+\end{document}
+ %\chapter{}
+%	\section{SMS teknologi}
+%	\input{Indhold/SMS_Teknologi}
