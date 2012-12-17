@@ -5,6 +5,7 @@
 typedef struct _uchar {
     char value;
     char extension;
+    char extension2;
 } uchar;
 
 typedef struct _huffnode {
@@ -139,7 +140,11 @@ unsigned long int fUnicodeChars(FILE *file)
         
         if(ch >= 0)
             result++;
-        else {
+        else if(ch  == -30) {
+            result++;
+            fgetc(file);
+            fgetc(file);
+        } else {
             fgetc(file);
             result++;
         }
@@ -182,14 +187,20 @@ uchar *fReadUnicode(char *filename)
     // Read file to end
     for(i = 0; i < length; i++){
         ch = fgetc(file);
-        // Parse unicode char to string
-        if(ch < 0) {
+        // Parse bytes to unicode char
+        
+        if(ch == -30) {
             contents[i].value = ch;
             ch = fgetc(file);
             contents[i].extension = ch;
-        } else {
+            ch = fgetc(file);
+            contents[i].extension2 = ch;
+        } else if(ch < 0 && ch != -30) {
             contents[i].value = ch;
-        }
+            ch = fgetc(file);
+            contents[i].extension = ch;
+        } else 
+            contents[i].value = ch;
     }
     // Terminate string
     contents[length].value = 0;
@@ -219,13 +230,18 @@ int fWriteUnicode(char *filename, uchar *string, int bom)
     // Determine the amount of chars to write
     unsigned long int length = ustrlen(string), i;
     // Buffer for writing
-    char current[2];
+    char current[3];
     
     // Write string to file
     for(i = 0; i < length; i++){
         if(string[i].value >= 0) {
             current[0] = string[i].value;
             fwrite(current, sizeof(char), 1, file);
+        } else if(string[i].value == -30) {
+            current[0] = string[i].value;
+            current[1] = string[i].extension;
+            current[2] = string[i].extension2;
+            fwrite(current, sizeof(char), 3, file);
         } else {
             current[0] = string[i].value;
             current[1] = string[i].extension;
@@ -249,6 +265,11 @@ uchar gsmToUchar(char ch)
         // Remapping
         switch (ch)
         {
+            case -101:
+                result.value = -30;
+                result.extension = -126;
+                result.extension2 = -84;
+                break;
             case -60:
                 result.value = 91;
                 break;
@@ -445,6 +466,10 @@ uchar gsmToUchar(char ch)
 char ucharToGSM(uchar ch)
 {
     // Remapping
+    
+    // Handle Euro-sign
+    if((ch.value == -30) && (ch.extension == -126) && (ch.extension2 == -84))
+        return -101;
     if(ch.value >= 0)
     {
         switch (ch.value)
@@ -575,12 +600,9 @@ char ucharToGSM(uchar ch)
                             return 126;
                     case -96:
                             return 127;
-                    default:
-                        printf("Read non GSM symbol, skipping\n");
-                        return 32;
                 }
                 default:
-                    printf("Read non GSM symbol, skipping\n");
+                    printf("%d Read non GSM symbol, skipping\n", ch.value);
                     return 32;
         }
     }
