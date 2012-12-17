@@ -1,9 +1,14 @@
-Vi har udviklet et program, der kan foretage komprimering, og dekomprimering af tekst, ved hjælp af Huffman komprimering. Teksten der bliver indlæst i programmet bliver komprimeret ud fra et statisk Huffman træ, genereret ud fra vores analyse af SMS-beskeder.
+Vi har udviklet et program, der kan foretage komprimering, og dekomprimering af tekst, ved hjælp af Huffman komprimering. Programmet er skrevet i programmeringssproget C, hvilket vil gøre det meget effektivt, hvis ellers koden er skrevet ordentligt.
+Teksten der bliver indlæst i programmet bliver komprimeret ud fra et statisk Huffman træ, genereret ud fra vores analyse af SMS-beskeder.
+
+
+\subsubsection{Konvertering til 7 bit (GSM 03.38)}
+Vi er i projektet begrænset af tid, og har derfor skrevet vores program til en computer. Så for at simulere at vores C program kører på en mobiltelefon, konverterer programmet de indlæste tegn, til de decimal-værdier der bliver brugt i GSM standarden. Dette sker ved, at decimal værdien for et tegn, bliver skiftet ud, med den decimal værdien for det tilsvarende tegn i GSM. Tegnsættet brugt i GSM hedder GSM 03.38, og beskriver hvordan forskellige tegn udtrykkes med 7 bit. For eksempel udtrykkes '@' i UTF8 som 0100 0000, men i GSM 7bit som 000 0000.
 
 
 \subsubsection{Komprimering}
 
-De data der skal komprimeres bliver læst fra en tekstfil på harddisken, ind i programmet. Disse data, bliver så sendt til komprimerings funktionen. Komprimerings funktionen, sørger så for at generere et Huffman træ, ud fra en fil på harddisken, med frekvenser for forskellige tegn. Dette kunne for eksempel være "gsmfreq.txt", lavet ud fra analysen af SMS-beskederne.
+De data der skal komprimeres bliver læst fra en tekstfil på harddisken ind i programmet. Disse data, bliver så sendt til komprimerings funktionen. Komprimerings funktionen, sørger så for at generere et Huffman træ, ud fra en fil på harddisken, med frekvenser for forskellige tegn. Dette kunne for eksempel være "gsmfreq.txt", lavet ud fra analysen af SMS-beskederne.
 Når træet er lavet, bliver teksten så komprimeret, ved at den binære værdi for hvert tegn bliver skiftet ud med den tilsvarende binære Huffman sekvens. Denne sekvens, bliver sendt videre til en buffer, og hver gang denne buffer indeholder 8 bit (1 byte), skriver den til harddisken. Filen den den skriver til er en binær fil, og denne fil, vil efterfølgende kunne bruges til at genskabe de originale data (dekomprimering).
 
 \subsubsection{Dekomprimering}
