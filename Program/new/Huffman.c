@@ -9,7 +9,7 @@ int main(void)
     char selection;
     
     // File paths
-    char *treefile = "wikifreq.txt";
+    char *treefile = "gsmfreq.txt";
     char *messagefile = "test.txt";
     char *compressionfile = "result.bin";
     char *outputfile = "output.txt";

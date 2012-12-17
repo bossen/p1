@@ -870,7 +870,7 @@ HuffNode *treeFromFile(const char *filename)
     FILE *tree = fopen(filename, "r");
     // Exception handling
     if(tree == NULL) {
-        printf("Tree file not found!");
+        printf(" Tree file not found!");
         return 0;
     }
     // Count number of entries in frequency file
