@@ -167,6 +167,11 @@ uchar *fReadUnicode(char *filename)
     // Variable declarations
     unsigned long int length = fUnicodeChars(file), i;
     uchar *contents = (uchar *)malloc(sizeof(uchar) * length + 1);
+    // Exception handling
+    if(contents == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     char ch;
     // Jump to start of file
     rewind(file);
@@ -540,7 +545,11 @@ char *fReadUnicodeAsGSM(char *filename)
     uchar *string = fReadUnicode(filename); 
     int length = ustrlen(string), i;
     char *gsmstring = (char *)malloc(sizeof(char) * length + 1);
-    
+    // Exception handling
+    if(gsmstring == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     // Convert to GSM 7-bit
     for(i = 0; i < length; i++)
         gsmstring[i] = ucharToGSM(string[i]);
@@ -554,6 +563,11 @@ void fWriteGSMAsUnicode(char *filename, char *data)
 {
     int length = gsmstrlen(data), i;
     uchar *original = (uchar *)malloc(sizeof(uchar) * length);
+    // Exception handling
+    if(original == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     // Convert to Unicode
     for(i = 0; i < length; i++) {
         original[i] = gsmToUchar(data[i]);
@@ -602,6 +616,11 @@ HuffNode **calculateEntryPoints(HuffNode *tree)
     
     // Dynamic memory allocation for reverse lookup table
     HuffNode **entryPoints = (HuffNode **)malloc(sizeof(HuffNode *) * 127 + 1);
+    // Exception handling
+    if(entryPoints == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     // Rewind filepointer
     rewind(treedata);
     
@@ -646,6 +665,11 @@ char *getEntryString(HuffNode **points, int point)
     
     // Allocate memory for huffman code
     char *entry = (char *)malloc(sizeof(char) * 40);
+    // Exception handling
+    if(entry == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     entry[0] = '\0';
     
     // Travel upwards tree path to root
@@ -678,6 +702,11 @@ char *getPaddingValue(HuffNode *tree, int minLength)
     }
     // Trim and malloc value to return
     char *result = (char *)malloc(sizeof(char) * strlen(currbin) + 1);
+    // Exception handling
+    if(result == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     strcpy(result, currbin);
     return result;
 }
@@ -724,7 +753,7 @@ void huffmanCompress(char *filename, char *message, HuffNode *tree)
     position++;
     
     // Write compressed binary to file
-    FILE *file = fopen(filename, "w");
+    FILE *file = fopen(filename, "wb");
     fwrite(result, sizeof(char), position, file);
     fclose(file);
 
@@ -758,6 +787,11 @@ char *huffmanDecompress(HuffNode *tree, char *inputfile)
     closeBitStream(stream);
     // Trim memory to exact size
     char *final = (char *)malloc(sizeof(char) * size + 1);
+    // Exception handling
+    if(final == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     for(position = 0; position < size; position++)
         final[position] = result[position];
     final[position] = -127;
@@ -807,6 +841,11 @@ HuffNode *generateTree(int count, char *letters, int *frequencies)
 	for (i = 0; i < count;i++)
 	{
 		priorityQueue[i] = (HuffNode *)malloc(sizeof(HuffNode));
+        // Exception handling
+        if(priorityQueue[i] == NULL) {
+            printf("Out of Memory! - Quitting");
+            exit(EXIT_FAILURE);
+        }
 		priorityQueue[i]->freq = frequencies[i];
 		priorityQueue[i]->symbol = letters[i];
 		priorityQueue[i]->left = NULL;
@@ -821,6 +860,11 @@ HuffNode *generateTree(int count, char *letters, int *frequencies)
 	while(cnt > 0)
 	{
 		rootNode = (HuffNode *)malloc(sizeof(HuffNode));
+        // Exception handling
+        if(rootNode == NULL) {
+            printf("Out of Memory! - Quitting");
+            exit(EXIT_FAILURE);
+        }
 		rootNode->right = *(priorityQueue + cnt);
         rootNode->right->connectionPoint = 0;
 		rootNode->left = *(priorityQueue + cnt - 1);
@@ -870,7 +914,7 @@ HuffNode *treeFromFile(const char *filename)
     FILE *tree = fopen(filename, "r");
     // Exception handling
     if(tree == NULL) {
-        printf("Tree file not found!");
+        printf(" Tree file not found!");
         return 0;
     }
     // Count number of entries in frequency file
@@ -885,6 +929,11 @@ HuffNode *treeFromFile(const char *filename)
     // Memory allocation
     char *symbols = (char *)malloc(sizeof(char) * lines);
     int *frequencies = (int *)malloc(sizeof(int) * lines);
+    // Exception handling
+    if(symbols == NULL || frequencies == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     
     // Read frequencies and symbols from file
     for(i = 0; i < lines; i++)
@@ -910,6 +959,11 @@ void closeBitStream(BitStream *stream)
 BitStream *establishBitStream(char *filename, char *mode)
 {
     BitStream *stream = (BitStream *)malloc(sizeof(BitStream));
+    // Exception handling
+    if(stream == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     stream->file = fopen(filename, mode);
     if(mode[0] == 'r')
         stream->position = 8;
@@ -952,6 +1006,11 @@ char *flipString(const char *string)
 {   
     int length = strlen(string);
     char *flipped = (char *)malloc(sizeof(char) * length + 1);
+    // Exception handling
+    if(flipped == NULL) {
+        printf("Out of Memory! - Quitting");
+        exit(EXIT_FAILURE);
+    }
     int i;
     for(i = 0;i < length; i++)
     {
