@@ -64,6 +64,11 @@
 %Hent titelblad (Som henter synopsis fra Indhold/Synopsis.tex):
 \input{Indhold/Titelblad}
 
+%create empty page
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
 \tableofcontents
 % Fjerner sidetal på indholdsfortegnelse
 \thispagestyle{empty}
@@ -145,6 +150,9 @@
    	
    	\subsection{Program beskrivelse}
    	\input{Indhold/Program_beskrivelse.tex}
+   	
+   	\section{Resultater}
+   	\input{Indhold/Resultater}
 
 \chapter{Konklusion}
 
