@@ -3,19 +3,19 @@ forudsætninger. Der forklares hvilken fremgangsmåde, der blev benyttet, samt o
 resultaterne.
 
 For at måle den gennemsnitlige komprimeringsgrad, programmet kan opnå, benytter vi en række samlinger 
-af SMS beskeder, fra forskellige personers mobiltelefoner med forskellige SMS beskeder præferencer. Hermed menes at der 
+af SMS beskeder, fra forskellige personers mobiltelefoner med forskellige SMS-præferencer. Hermed menes at der 
 var stor forskel på længden af beskederne, men også det skriftlige sprog, heriblandt brugen af 
-humørikoner.
-Disse samlinger af beskeder blev samlet i en enkel fil, som blev komprimeret med programmet.
-Denne fremgangsmåde blev gjort med både GSM bit-træet, skabt ud fra SMS beskeder, og med bit-træet skabt med 
-artikler fra Wikipedia. Dette gør det muligt at sammenligne effektiviteten af det statiske bit træ, som 
-er lavet til SMS beskeders formål, hvorimod træet ud fra Wikipedia, henvender sig bedre til artikler og et 
-andet ordforråd end det typisk benyttede i SMS beskeder.
+smileys.
+Disse samlinger af beskeder blev samlet i en enkelt fil, som blev komprimeret med programmet.
+Filen blev både komprimeret med træet skabt udfra SMS beskeder, og med træet skabt udfra 
+artikler fra Wikipedia. Dette gør det muligt at sammenligne effektiviteten af det statiske træ, som 
+er lavet til SMS-beskeders formål, hvorimod træet ud fra Wikipedia, henvender sig bedre til artikler og et 
+andet ordforråd end det, der typisk benyttes i SMS-beskeder.
 Herved er det muligt at sammenligne størrelsen på den komprimerede fil, i forhold til den originale fil 
-med de læsbare SMS beskeder.
+med de læsbare SMS-beskeder.
 
-På figur \ref{resultatgraf} er forskellen på en gennemsnitlig komprimeret SMS sammenlignet med en 
-gennemsnitlig original SMS.
+På figur \ref{resultatgraf} er forskellen på en gennemsnitlig komprimeret SMS-besked sammenlignet med en 
+gennemsnitlig original SMS-besked.
 
 På grafen ses tre forskellige typer dele som udgøre blokken. Filstørrelsen er den største del, som ved den 
 originale besked udgør hele filen.
@@ -23,22 +23,22 @@ originale besked udgør hele filen.
 Anden del, er de tegn som ikke er en del af GSM standarden, som programmet har sprunget over, og derved 
 stadig burde være en del af beskeden.
 
-Sidste del sker, fordi alle SMS beskederne blev lagt sammen i en enkelt fil. Når programmet komprimerer en SMS, 
+Sidste del sker, fordi alle SMS beskederne blev lagt sammen i en enkelt fil. Når programmet komprimerer en SMS-besked, bliver 
 antallet af bits nødt til at gå op i 8, ellers vil programmet selv tilføje resten. Det betyder derfor, at 
 fordi alle beskederne samles i en fil, vil det kun være ved den sidste besked at dette sker, og dette er 
 en estimering, af hvor meget det vil svare til.
 
-Det ses også hvordan en SMS komprimeret med et bit-træ skabt ud fra SMS beskeder fungerer bedre end et skabt 
+Det ses også hvordan en SMS komprimeret med et træ skabt ud fra SMS-beskeder fungerer bedre end et skabt 
 fra Wikipedias artikler.
 
 \input{Billeder/resultatgraf.tex}
 
 Som også ses på \ref{resultatgraf} er det gennemsnitligt lykkedes at komprimere en besked op til 42\% ved 
-hjælp af det statiske bit-træ skabt ud fra SMS beskeder.
-Her skal det så også pointeres at dette bit-træ er skabt ud fra disse SMS beskeder, så denne er netop optimeret 
-til denne samling af SMS beskeder, hvorimod en ny samling, vil være en smule anderledes.
+hjælp af det statiske træ skabt ud fra SMS-beskeder.
+Her skal det så også pointeres at dette træ er skabt ud fra disse SMS-beskeder, så denne er netop optimeret 
+til denne samling af SMS-beskeder, hvorimod en ny samling, vil være en smule anderledes.
 
 Ved at udregne ligningen X tegn * 0,6 = 160 tegn, hvor X er det antal tegn, som det er muligt 
 gennemsnitligt at sende komprimeret. 0,6 er de 60\%, som det gennemsnitligt er muligt at mindske filens 
 størrelse til. De 160 tegn, er det antal tegn, som der kan sendes med en SMS-besked.
-Herved er det muligt at skrive op til 266 tegn i en enkelt SMS.
+Herved er det muligt at skrive op til 266 tegn i en enkelt SMS besked.
