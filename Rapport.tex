@@ -63,12 +63,17 @@
 \newpage
 \thispagestyle{empty}
 \mbox{}
-
-\tableofcontents
+\addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
+{\small\tableofcontents}
 % Fjerner sidetal på indholdsfortegnelse
 \thispagestyle{empty}
-
 \renewcommand{\chaptername}{Kapitel}
+
+
+%create empty page
+\newpage
+\thispagestyle{empty}
+\mbox{}
 
 % TEKST SÆTTES UNDER HER
 \chapter{Indledning}
