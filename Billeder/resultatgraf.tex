@@ -1,4 +1,4 @@
-\begin{figure}
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[xbar stacked,
@@ -13,25 +13,26 @@ xtick={0,10,20,30,40,50,60,70,80,90,100},
 width=.8\textwidth,
 height=5cm,
 bar width=5mm,
-xlabel={StOErrelse i procent},
-yticklabels={WIKI bittrAE, GSM bittrAE, Original besked},
+xlabel={Størrelse i procent},
+yticklabels={WIKI bittræ, GSM bittræ, Original besked},
 xmin=0,
 xmax=100,
 area legend,
 enlarge y limits=0.6,
+xticklabel=$\pgfmathprintnumber{\tick}$\,\%,
 ]
 % Filstørrelse
-\addplot[ForestGreen,fill=ForestGreen] coordinates
+\addplot[Sapphire,fill=Sapphire] coordinates
 {(60.37,0) (58.34,1) (100,2)};
 % Ubrugte tegn
 \addplot[ForestLight,fill=ForestLight] coordinates
 {(2,0) (2,1) (0,2)};
 % Fejl i bit
-\addplot[ForestDark,fill=ForestDark] coordinates
+\addplot[ForestGreen,fill=ForestGreen] coordinates
 {(1.1,0) (1.1,1) (0,2)};
-\legend{FilstOErrelse,Ubrugte tegn, Fejl i bit}
+\legend{Filstørrelse,Ubrugte tegn, Fejl i bit}
 \end{axis}
 \end{tikzpicture}
-\caption{FilstOErrelse i forhold til original stOErrelse}
+\caption{Filstørrelse i forhold til original størrelse}
 \label{resultatgraf}
 \end{figure}
